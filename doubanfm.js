@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name       Douban.FM ad remover
-// @namespace  http://uanguei.info
-// @version    1.1
-// @description  A little clean job for douban.fm
+// @name       Douban.FM Cleaner
+// @namespace  lastr2d2
+// @version    2.0
+// @description  Keep the page simple. (douban.fm)
 // @include    http://douban.fm/*
-// @author     Wayne Wang(nkgailei@gmail.com) 
+// @author     Wayne Wang(lastr2d2(at)gmail.com) 
 // ==/UserScript==
 
 var DoubanFMAdRemover = function(){
@@ -53,6 +53,13 @@ DoubanFMAdRemover.prototype.Main = function(){
 		}
 		anonymousLoginSection.style.width = "auto";
 	}
+    
+    // remove all channel non-default list
+    var channels = document.getElementsByClassName('chl_section');
+    for(var i=0; i<channels.length; i++){
+        channels[i].style.display="none";
+    }
+    
 };
 
 var worker = new DoubanFMAdRemover();
