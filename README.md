@@ -1,4 +1,3 @@
-scripts-doubanfm
-================
+<h4>Screenshot</h4>
 
-My userscript for douban.fm
+[![Foo](http://s3.amazonaws.com/uso_ss/24609/large.png?1388568208)]()
