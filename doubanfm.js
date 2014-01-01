@@ -37,13 +37,16 @@ DoubanFMAdRemover.prototype.Main = function(){
     // ad
     'iframe','#fm-rotate-ad',
     // all channels except personal channels
-    '.chl_section'];
+    '.chl_section',
+    // anonymous login section, hide all links except login link (register and upgrade to PRO)
+    '.fm-user-login i',
+    '.fm-user-login a:not(.lnk-login)'];i
     
     // hide elements
-    css = elementsToHide.join() + "{display:none;}";
+    css = elementsToHide.join() + "{display:none !important;}";
 
-    // remove register link and upgrade link in anonymous login section
-    css += '.fn-user-login {visibility:hidden;} .lnk-login{visibility:visible;}';
+    // fix width
+    css += ".fn-user-login{width:auto}";
     
     this.addGlobalCSSRules(css);
 };
