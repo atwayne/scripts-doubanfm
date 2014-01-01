@@ -40,7 +40,7 @@ DoubanFMAdRemover.prototype.Main = function(){
     '.chl_section',
     // anonymous login section, hide all links except login link (register and upgrade to PRO)
     '.fm-user-login i',
-    '.fm-user-login a:not(.lnk-login)'];i
+    '.fm-user-login a:not(.lnk-login)'];
     
     // hide elements
     css = elementsToHide.join() + "{display:none !important;}";
