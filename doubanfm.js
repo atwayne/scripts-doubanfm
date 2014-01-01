@@ -1,66 +1,53 @@
 // ==UserScript==
 // @name       Douban.FM Cleaner
 // @namespace  lastr2d2
-// @version    2.0
+// @version    3.0
 // @description  Keep the page simple. (douban.fm)
 // @include    http://douban.fm/*
 // @author     Wayne Wang(lastr2d2(at)gmail.com) 
 // ==/UserScript==
 
-var DoubanFMAdRemover = function(){
-    this.elementsToHide = ['fm-clients','fm-footer','fm-sharing','user_info','fm-app','fm-rotate-ad'];
-    this.elementsToRemove = [];
+(function(){
+var DoubanFMAdRemover = function(){};
+
+// utility method, create style tag in head
+DoubanFMAdRemover.prototype.addGlobalCSSRules = function(css){
+    var head, style;
+    head = document.getElementsByTagName('head')[0];
+    if(!head) return;
+    style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = css;
+    head.appendChild(style);
 };
 
-DoubanFMAdRemover.prototype.hideElement = function(elementId){
-    var element = document.getElementById(elementId);
-    if(element === undefined || element === null){
-        return;
-    }
-    element.style.display = 'none';
-};
-
-DoubanFMAdRemover.prototype.removeElement = function(elementId){
-    var element = document.getElementById(elementId);
-    if(element === undefined || element === null){
-        return;
-    }
-    element.parentNode.removeChild(element);
-};
-
+// main
 DoubanFMAdRemover.prototype.Main = function(){
-    var i;
-    for( i =0; i<this.elementsToHide.length; i ++){
-        this.hideElement(this.elementsToHide[i]);
-    }
+    var elementsToHide, css;
     
-    for(i = 0; i<this.elementsToRemove.length; i ++){
-        this.removeElement(this.elementsToRemove[i]);
-    }
+    elementsToHide = [
+    // copyright and links
+    '#fm-footer',
+    // sharing
+    '#fm-sharing',
+    // user info (logged in)
+    '#user_info',
+    // app suggestion
+    '#fm-section-app-entry',
+    // ad
+    'iframe','#fm-rotate-ad',
+    // all channels except personal channels
+    '.chl_section'];
     
-	// remove register link and upgrade link in anonymous login section
-	var anonymousLoginSection = document.getElementsByClassName('fm-user-login')[0];
-	if(anonymousLoginSection != undefined){
-		var loginLink = undefined;
-		for (var i = 0; i < anonymousLoginSection.childNodes.length; i++) {
-			if (anonymousLoginSection.childNodes[i].className == "lnk-login") {
-				loginLink = anonymousLoginSection.childNodes[i];
-				break;
-			}
-		}
-		if(loginLink != undefined){
-			anonymousLoginSection.innerHTML = loginLink.outerHTML;
-		}
-		anonymousLoginSection.style.width = "auto";
-	}
+    // hide elements
+    css = elementsToHide.join() + "{display:none;}";
+
+    // remove register link and upgrade link in anonymous login section
+    css += '.fn-user-login {visibility:hidden;} .lnk-login{visibility:visible;}';
     
-    // remove all channel non-default list
-    var channels = document.getElementsByClassName('chl_section');
-    for(var i=0; i<channels.length; i++){
-        channels[i].style.display="none";
-    }
-    
+    this.addGlobalCSSRules(css);
 };
 
 var worker = new DoubanFMAdRemover();
 worker.Main();
+})();
