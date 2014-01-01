@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       Douban.FM Cleaner
 // @namespace  lastr2d2
-// @version    3.0
+// @version    3.1
 // @description  Keep the page simple. (douban.fm)
 // @include    http://douban.fm/*
 // @author     Wayne Wang(lastr2d2(at)gmail.com) 
@@ -46,7 +46,7 @@ DoubanFMAdRemover.prototype.Main = function(){
     css = elementsToHide.join() + "{display:none !important;}";
 
     // fix width
-    css += ".fn-user-login{width:auto}";
+    css += ".fm-user-login{width:auto !important;}";
     
     this.addGlobalCSSRules(css);
 };
