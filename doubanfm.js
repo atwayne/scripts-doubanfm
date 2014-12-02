@@ -40,7 +40,14 @@ DoubanFMAdRemover.prototype.Main = function(){
     '.chl_section',
     // anonymous login section, hide all links except login link (register and upgrade to PRO)
     '.fm-user-login i',
-    '.fm-user-login a:not(.lnk-login)'];
+    '.fm-user-login a:not(.lnk-login)',
+    // send to phone
+    '.send-song-to-phone',
+    // simulate songs
+    '#simulate-sec',
+    // playlists which contains current sone
+    '#fm-playlists'
+    ];
     
     // hide elements
     css = elementsToHide.join() + "{display:none !important;}";
